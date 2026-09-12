@@ -8,15 +8,12 @@ import java.nio.file.Path;
 import java.util.Arrays;
 
 /**
- * An example of how to read and process a CSV file.
- * It uses that CsvParser class.
- * Copy both files into a package of your choice
- * This code uses only basic features of the Java language.
- * Feel free to modify this example.
+ * This is modified code of the provided example code
+ * that was provided in the labs.
  */
 public class ReadCSV {
     public static void main(String[] args) {
-        //String csvFileName = "stocks.csv";
+
         String csvFileName = "Property_Assessment_Data_2026.csv";
 
         try {
@@ -58,10 +55,6 @@ public class ReadCSV {
             String record;
             while ((record = reader.readLine()) != null) {
                 // Parse the record into fields
-                // A simple CSV line with fields that are not surrounded by double-quotes,
-                // and all commas acting as separators, can be split using the String.plit() method.
-                // String[] values = record.split(",");
-                // Otherwise, a more general CSV parsing is required:
                 String[] values = CsvParser.parseCSVLine(record);
 
                 // Check if the array is full
@@ -79,36 +72,56 @@ public class ReadCSV {
         return Arrays.copyOf(data, currentIndex);
     }
 
+    /**
+     * Read a 2D String array and return the wards found within a specific row
+     *
+     * @param data - the 2D String array
+     * @return the wards found with no duplicates as an array of strings
+     */
     private static String[] findWards(String[][] data) {
+        // Initialize the string array to collect the wards
         String[] wards;
         int currentPosition = 0;
 
+        // Initialize the size of the ward array
         int initialSize = 10;
         wards = new String[initialSize];
 
+        // Initialize a string array to split ward lists if needed
         String[] splitRow;
+
+        // Loop through the 2D array
         for (String[] row : data) {
 
+            // Update the size of the string array to keep it from overflowing
             if (currentPosition == wards.length) {
                 wards = Arrays.copyOf(wards, wards.length + 1);
             }
 
+            /**
+             * If the row contains a "," it needs to be split before it can be added to the array
+             * If it does not contain a comma but already contains the word or is an empty space do not add to the array
+             * If the above cases are not true then add the current word to the next position in the array
+             */
             if (row[6].contains(",")){
+                // Split at the ", " to ensure that the item follwing the comma is properly addressed
                 splitRow = row[6].split(", ");
 
+                // Loop through the items in the new split array in order to put them into the ward array
                 for (String item: splitRow){
+                    // Duplicated code from outside the comma split code, could probably figure out a way to remove the need for duplicated code
                     if (currentPosition == wards.length) {
                         wards = Arrays.copyOf(wards, wards.length + 1);
                     }
 
-                    if (Arrays.asList(wards).contains(item) || (item == "")) { // temp fix
+                    if (Arrays.asList(wards).contains(item) || (item == "")) {
 
                     } else {
                         wards[currentPosition++] = item;
                     }
 
                 }
-            } else if (Arrays.asList(wards).contains(row[6]) || (row[6] == "")) { // temp fix
+            } else if (Arrays.asList(wards).contains(row[6]) || (row[6] == "")) {
 
             } else {
                 wards[currentPosition++] = row[6];
@@ -119,19 +132,29 @@ public class ReadCSV {
         return Arrays.copyOf(wards, currentPosition);
     }
 
+    /**
+     * Read through the 2D String array and return the assessment classes found in row[10] of the file
+     *
+     * @param data - the 2D String array
+     * @return the assessment classes found within the data file
+     */
     private static String[] assessmentClasses(String[][] data) {
         String[] classes;
         int currentPosition = 0;
 
+        // Initialize size of classes array
         int initialSize = 5;
         classes = new String[initialSize];
 
+        // Loop through 2D string array and add each new assessment class to the array
         for (String[] row : data) {
 
+            // Update size of array
             if (currentPosition == classes.length) {
                 classes = Arrays.copyOf(classes, classes.length + 1);
             }
 
+            // If the array already contains the current string do nothing, else add it to the array
             if (Arrays.asList(classes).contains(row[10])) {
 
             } else {
@@ -143,6 +166,12 @@ public class ReadCSV {
 
     }
 
+    /**
+     * Read through 2D array data and return the lowest assessed value
+     *
+     * @param data - the 2D String array
+     * @return the lowest value present in the dataset as an Integer
+     */
     private static Integer lowestAssessed(String[][] data) {
         int lowest = Integer.MAX_VALUE;
 
@@ -157,6 +186,12 @@ public class ReadCSV {
         return lowest;
     }
 
+    /**
+     * Read through 2D array data and return the largest assessed value
+     *
+     * @param data - the 2D String array
+     * @return the largest value present in the dataset as an Integer
+     */
     private static Integer largestAssessed(String[][] data) {
         int largest = Integer.MIN_VALUE;
 
@@ -172,7 +207,7 @@ public class ReadCSV {
     }
 
     /**
-     * Print all rows of data.
+     * Print the number of entries in the data
      *
      * @param data - 2D array containing data
      */
@@ -182,6 +217,11 @@ public class ReadCSV {
 
     }
 
+    /**
+     * Print the names of each ward in the data as well as the number of wards present in the data
+     *
+     * @param wards - a String array
+     */
     private static void printWards(String[] wards) {
 
         System.out.println("Wards: " + Arrays.toString(wards));
@@ -189,17 +229,29 @@ public class ReadCSV {
 
     }
 
-    // Prints the assessment classes
+    /**
+     * Print the names of the assessment classes found within the data
+     *
+     * @param classes - a String array
+     */
     private static void printClasses(String[] classes) {
         System.out.println("Classes: " + Arrays.toString(classes));
     }
 
-    // Prints the lowest assessment value
+    /**
+     * Print the lowest assessed value found within the data
+     *
+     * @param lowest - an Integer value
+     */
     private static void printLowest(int lowest){
         System.out.println("The lowest assessment is: " + lowest);
     }
 
-    // Prints the largest assessment value
+    /**
+     * Print the largest assessed value found within the data
+     *
+     * @param largest - an Integer value
+     */
     private static void printLargest(int largest){
         System.out.println("The largest assessment is:" + largest);
     }
