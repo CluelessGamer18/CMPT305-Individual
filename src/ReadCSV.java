@@ -114,14 +114,14 @@ public class ReadCSV {
                         wards = Arrays.copyOf(wards, wards.length + 1);
                     }
 
-                    if (Arrays.asList(wards).contains(item) || (item.equals(""))) {
+                    if (Arrays.asList(wards).contains(item) || (item.isEmpty())) {
 
                     } else {
                         wards[currentPosition++] = item;
                     }
 
                 }
-            } else if (Arrays.asList(wards).contains(row[6]) || (row[6].equals(""))) {
+            } else if (Arrays.asList(wards).contains(row[6]) || (row[6].isEmpty())) {
 
             } else {
                 wards[currentPosition++] = row[6];
