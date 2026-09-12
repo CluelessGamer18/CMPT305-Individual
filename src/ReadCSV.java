@@ -98,7 +98,7 @@ public class ReadCSV {
                 wards = Arrays.copyOf(wards, wards.length + 1);
             }
 
-            /**
+            /*
              * If the row contains a "," it needs to be split before it can be added to the array
              * If it does not contain a comma but already contains the word or is an empty space do not add to the array
              * If the above cases are not true then add the current word to the next position in the array
@@ -121,7 +121,7 @@ public class ReadCSV {
                     }
 
                 }
-            } else if (Arrays.asList(wards).contains(row[6]) || (row[6].isEmpty()   )) {
+            } else if (Arrays.asList(wards).contains(row[6]) || (row[6].isEmpty())) {
 
             } else {
                 wards[currentPosition++] = row[6];
@@ -253,7 +253,7 @@ public class ReadCSV {
      * @param largest - an Integer value
      */
     private static void printLargest(int largest){
-        System.out.println("The largest assessment is:" + largest);
+        System.out.println("The largest assessment is: " + largest);
     }
 
 }
