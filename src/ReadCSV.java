@@ -121,7 +121,7 @@ public class ReadCSV {
                     }
 
                 }
-            } else if (Arrays.asList(wards).contains(row[6]) || (row[6].isEmpty())) {
+            } else if (Arrays.asList(wards).contains(row[6]) || (row[6].isEmpty()   )) {
 
             } else {
                 wards[currentPosition++] = row[6];
