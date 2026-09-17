@@ -225,7 +225,7 @@ public class ReadCSV {
     private static void printWards(String[] wards) {
 
         System.out.println("Wards: " + Arrays.toString(wards));
-        System.out.println(wards.length);
+        System.out.println("There are: " + wards.length + " wards in Edmonton");
 
     }
 
@@ -235,6 +235,7 @@ public class ReadCSV {
      * @param classes - a String array
      */
     private static void printClasses(String[] classes) {
+
         System.out.println("Classes: " + Arrays.toString(classes));
     }
 
@@ -244,6 +245,7 @@ public class ReadCSV {
      * @param lowest - an Integer value
      */
     private static void printLowest(int lowest){
+
         System.out.println("The lowest assessment is: " + lowest);
     }
 
@@ -253,6 +255,7 @@ public class ReadCSV {
      * @param largest - an Integer value
      */
     private static void printLargest(int largest){
+
         System.out.println("The largest assessment is: " + largest);
     }
 
