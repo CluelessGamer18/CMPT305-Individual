@@ -15,30 +15,21 @@ public class ReadCSV {
     public static void main(String[] args) {
 
         String csvFileName = "Property_Assessment_Data_2026_Small.csv";
-        String[][] data = null;
 
         try {
-            data = readData(csvFileName);
+            String[][] data = readData(csvFileName);
+            String[] wards = findWards(data);
+            String[] classes = assessmentClasses(data);
+            int lowest = lowestAssessed(data);
+            int largest = largestAssessed(data);
+            printLowest(lowest);
+            printLargest(largest);
+            printWards(wards);
+            printClasses(classes);
         } catch (IOException e) {
             System.out.println("Failed to read " + csvFileName);
         }
 
-        /*
-         * Make calls using the parsed data using required information
-         */
-        // String[] wards = findWards(data);
-        // String[] classes = assessmentClasses(data);
-        // int lowest = lowestAssessed(data);
-        // int largest = largestAssessed(data);
-        // printLowest(lowest)
-        // printLargest(largest)
-        // printWards(wards);
-        // printClasses(classes);
-        printData(data);
-        printLowest(lowestAssessed(data));
-        printLargest(largestAssessed(data));
-        printWards(findWards(data));
-        printClasses(assessmentClasses(data));
     }
 
     /**
