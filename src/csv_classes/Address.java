@@ -1,8 +1,10 @@
 package csv_classes;
 
+import java.util.Objects;
+
 public class Address {
-    private Integer suiteNumber;
-    private Integer houseNumber;
+    private int suiteNumber = 0;
+    private int houseNumber = 0;
     private String streetName;
 
     public Address(int suiteNumber, int houseNumber, String streetName){
@@ -26,9 +28,25 @@ public class Address {
     @Override
     public String toString(){
         String result  = "";
-        if (suiteNumber != null) result += suiteNumber + "-";
-        if (houseNumber != null) result += houseNumber + " ";
+        if (suiteNumber != 0) result += suiteNumber + "-";
+        if (houseNumber != 0) result += houseNumber + " ";
         if (!streetName.isEmpty()) result += streetName;
         return result.trim();
+    }
+
+    @Override
+    public boolean equals(Object obj){
+        if (this == obj) return true;
+        if (obj == null || getClass() != obj.getClass()) return false;
+
+        Address other = (Address) obj;
+        return suiteNumber == other.suiteNumber
+                && houseNumber == other.houseNumber
+                && Objects.equals(streetName, other.streetName);
+    }
+
+    @Override
+    public int hashCode(){
+        return Objects.hash(suiteNumber, houseNumber, streetName);
     }
 }

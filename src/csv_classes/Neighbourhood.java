@@ -1,5 +1,7 @@
 package csv_classes;
 
+import java.util.Objects;
+
 public class Neighbourhood {
     private int neighbourhoodID;
     private String neighbourhoodName;
@@ -16,6 +18,7 @@ public class Neighbourhood {
     }
 
     public String getNeighbourhoodName(){
+
         return neighbourhoodName;
     }
 
@@ -25,6 +28,23 @@ public class Neighbourhood {
 
     @Override
     public String toString(){
+
         return neighbourhoodName + ": " + neighbourhoodID + " Ward: " + ward;
+    }
+
+    @Override
+    public boolean equals(Object obj){
+        if (this == obj) return true;
+        if (obj == null || getClass() != obj.getClass()) return false;
+
+        Neighbourhood other = (Neighbourhood) obj;
+        return neighbourhoodID == other.neighbourhoodID
+                && Objects.equals(neighbourhoodName, other.neighbourhoodName)
+                && Objects.equals(ward, other.ward);
+    }
+
+    @Override
+    public int hashCode(){
+        return Objects.hash(neighbourhoodID, neighbourhoodName, ward);
     }
 }

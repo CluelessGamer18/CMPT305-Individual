@@ -1,6 +1,7 @@
 package csv_classes;
 
 import java.util.List;
+import java.util.Objects;
 
 public class PropertyAssessment {
     private int accountNumber;
@@ -43,7 +44,7 @@ public class PropertyAssessment {
         return address.toString();
     }
 
-    public String getneighbourhood(){
+    public String getNeighbourhood(){
         return neighbourhood.toString();
     }
 
@@ -53,6 +54,27 @@ public class PropertyAssessment {
 
     public List<AssessmentClass> getAssessmentClasses(){
         return assessmentClasses;
+    }
+
+    @Override
+    public boolean equals(Object obj){
+        if (this == obj) return true;
+        if (obj == null || getClass() != obj.getClass()) return false;
+
+        PropertyAssessment other = (PropertyAssessment) obj;
+        return accountNumber == other.accountNumber
+                && assessedValue == other.assessedValue
+                && garage == other.garage
+                && Objects.equals(taxClass, other.taxClass)
+                && Objects.equals(address, other.address)
+                && Objects.equals(neighbourhood, other.neighbourhood)
+                && Objects.equals(assessmentClasses, other.assessmentClasses)
+                && Objects.equals(location, other.location);
+    }
+
+    @Override
+    public int hashCode(){
+        return Objects.hash(accountNumber, assessedValue, garage, taxClass, address, neighbourhood, assessmentClasses, location);
     }
 
 }
