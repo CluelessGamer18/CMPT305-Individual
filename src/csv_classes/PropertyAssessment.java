@@ -3,7 +3,7 @@ package csv_classes;
 import java.util.List;
 import java.util.Objects;
 
-public class PropertyAssessment {
+public class PropertyAssessment implements Comparable<PropertyAssessment>{
     private int accountNumber;
     private int assessedValue;
     private boolean garage;
@@ -28,8 +28,9 @@ public class PropertyAssessment {
         return accountNumber;
     }
 
-    public int getAssessedValue(){
-        return assessedValue;
+    public String getAssessedValue(){
+        String result = "$" + String.format("%,d", assessedValue);
+        return result;
     }
 
     public boolean hasGarage(){
@@ -58,9 +59,9 @@ public class PropertyAssessment {
 
     @Override
     public String toString(){
-        return "Account Number: " + accountNumber + "\nAssessed Value: " + assessedValue + "\nHas Garage?: " + garage
-                + "\nTax Class: " + taxClass + "\nAddress: " + address.toString() + "\nNeighbourhood: " + neighbourhood.toString()
-                + "\nAssessment Classes: " + assessmentClasses + "\nLocation (lat/long): " + location.toString();
+        return "Account Number: " + getAccountNumber() + "\nAssessed Value: " + getAssessedValue() + "\nHas Garage?: " + hasGarage()
+                + "\nTax Class: " + getTaxClass() + "\nAddress: " + getAddress() + "\nNeighbourhood: " + getNeighbourhood()
+                + "\nAssessment Classes: " + getAssessmentClasses() + "\nLocation (lat/long): " + getLocation();
      }
     @Override
     public boolean equals(Object obj){
@@ -81,6 +82,11 @@ public class PropertyAssessment {
     @Override
     public int hashCode(){
         return Objects.hash(accountNumber, assessedValue, garage, taxClass, address, neighbourhood, assessmentClasses, location);
+    }
+
+    @Override
+    public int compareTo(PropertyAssessment other){
+        return Integer.compare(this.assessedValue, other.assessedValue);
     }
 
 }

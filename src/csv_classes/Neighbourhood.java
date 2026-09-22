@@ -1,5 +1,6 @@
 package csv_classes;
 
+import java.util.Locale;
 import java.util.Objects;
 
 public class Neighbourhood {
@@ -9,7 +10,7 @@ public class Neighbourhood {
 
     public Neighbourhood(int neighbourhoodID, String neighbourhoodName, String ward){
         this.neighbourhoodID = neighbourhoodID;
-        this.neighbourhoodName = neighbourhoodName;
+        this.neighbourhoodName = neighbourhoodName.toUpperCase();
         this.ward = ward;
     }
 
@@ -29,7 +30,7 @@ public class Neighbourhood {
     @Override
     public String toString(){
 
-        return neighbourhoodName + ": " + neighbourhoodID + " Ward: " + ward;
+        return neighbourhoodName + " (" + ward + ")";
     }
 
     @Override
