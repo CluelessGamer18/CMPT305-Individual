@@ -57,6 +57,12 @@ public class PropertyAssessment {
     }
 
     @Override
+    public String toString(){
+        return "Account Number: " + accountNumber + "\nAssessed Value: " + assessedValue + "\nHas Garage?: " + garage
+                + "\nTax Class: " + taxClass + "\nAddress: " + address.toString() + "\nNeighbourhood: " + neighbourhood.toString()
+                + "\nAssessment Classes: " + assessmentClasses + "\nLocation (lat/long): " + location.toString();
+     }
+    @Override
     public boolean equals(Object obj){
         if (this == obj) return true;
         if (obj == null || getClass() != obj.getClass()) return false;
