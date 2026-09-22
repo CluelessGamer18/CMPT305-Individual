@@ -4,13 +4,13 @@ import java.util.List;
 import java.util.Objects;
 
 public class PropertyAssessment implements Comparable<PropertyAssessment>{
-    private int accountNumber;
-    private int assessedValue;
-    private boolean garage;
-    private String taxClass;
-    private Address address;
-    private Neighbourhood neighbourhood;
-    private Location location;
+    private final int accountNumber;
+    private final int assessedValue;
+    private final boolean garage;
+    private final String taxClass;
+    private final Address address;
+    private final Neighbourhood neighbourhood;
+    private final Location location;
     private List<AssessmentClass> assessmentClasses;
 
     public PropertyAssessment(int accountNumber, int assessedValue, boolean garage, String taxClass, Address address, Neighbourhood neighbourhood, List<AssessmentClass> assessmentClasses, Location location){
@@ -29,8 +29,11 @@ public class PropertyAssessment implements Comparable<PropertyAssessment>{
     }
 
     public String getAssessedValue(){
-        String result = "$" + String.format("%,d", assessedValue);
-        return result;
+        return "$" + String.format("%,d", assessedValue);
+    }
+
+    public int getAssessedValueRaw(){
+        return assessedValue;
     }
 
     public boolean hasGarage(){

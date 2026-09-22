@@ -30,7 +30,7 @@ public class Neighbourhood {
     @Override
     public String toString(){
 
-        return neighbourhoodName + " (" + ward + ")";
+        return neighbourhoodName + " (" + ward.toLowerCase() + ")";
     }
 
     @Override
