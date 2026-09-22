@@ -15,6 +15,6 @@ public class PropertyAssessments {
     }
 
     public List<PropertyAssessment> getAssessments(){
-        return assessments;
+        return new ArrayList<>(assessments);
     }
 }
