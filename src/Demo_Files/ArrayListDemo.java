@@ -1,4 +1,4 @@
-
+package Demo_Files;
 /* This code is provided for use by students in CMPT 305 at MacEwan University.
  * Do not distribute or share this code outside the course. */
 
