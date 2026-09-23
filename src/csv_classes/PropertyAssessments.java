@@ -170,6 +170,7 @@ public class PropertyAssessments {
         if (s == null || s.isBlank()) return defaultValue;
         return Integer.parseInt(s.trim());
     }
+
     /**
      * Read the contents of a CSV file and return data as a 2D array of String.
      * This function is taken from Lab 1 of CMPT 305, credit goes to Dr Mees.

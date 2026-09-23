@@ -57,7 +57,6 @@ public class Lab2Main {
             return;
         }
         int accNum = scanner.nextInt();
-        scanner.nextLine();
 
         PropertyAssessment pa = assessments.filterById(accNum);
         if (pa == null){
@@ -70,11 +69,22 @@ public class Lab2Main {
             System.out.println("Neighbourhood = " + pa.getNeighbourhood());
             System.out.println("Location = " + pa.getLocation());
         }
+        scanner.nextLine();
     }
 
     private static void filterByNeighbourHood(Scanner scanner, PropertyAssessments assessments) {
         System.out.print("\nFind statistics by neighbourhood: ");
+
+        if (scanner.hasNextInt()){
+            System.out.println("Invalid neighbourhood name");
+            return;
+        }
         String name = scanner.nextLine();
+
+        if (name.isEmpty()){
+            System.out.println("Invalid neighbourhood name");
+            return;
+        }
 
         PropertyAssessments filter = assessments.filterByNeighbourhood(name.toUpperCase());
         if (filter.size() == 0){
