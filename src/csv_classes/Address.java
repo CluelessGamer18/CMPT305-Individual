@@ -3,17 +3,17 @@ package csv_classes;
 import java.util.Objects;
 
 public class Address {
-    private int suiteNumber = 0;
+    private String suiteNumber;
     private int houseNumber = 0;
     private String streetName;
 
-    public Address(int suiteNumber, int houseNumber, String streetName){
+    public Address(String suiteNumber, int houseNumber, String streetName){
         this.suiteNumber = suiteNumber;
         this.houseNumber = houseNumber;
         this.streetName = streetName;
     }
 
-    public int getSuiteNumber(){
+    public String getSuiteNumber(){
         return suiteNumber;
     }
 
@@ -28,7 +28,7 @@ public class Address {
     @Override
     public String toString(){
         String result  = "";
-        if (suiteNumber != 0) result += suiteNumber + "-";
+        if (!suiteNumber.isEmpty()) result += suiteNumber + "-";
         if (houseNumber != 0) result += houseNumber + " ";
         if (!streetName.isEmpty()) result += streetName;
         return result.trim();
@@ -40,7 +40,7 @@ public class Address {
         if (obj == null || getClass() != obj.getClass()) return false;
 
         Address other = (Address) obj;
-        return suiteNumber == other.suiteNumber
+        return Objects.equals(suiteNumber, other.suiteNumber)
                 && houseNumber == other.houseNumber
                 && Objects.equals(streetName, other.streetName);
     }

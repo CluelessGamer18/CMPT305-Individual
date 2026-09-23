@@ -5,6 +5,7 @@ import java.io.IOException;
 import java.nio.file.Files;
 import java.nio.file.Path;
 import java.util.Arrays;
+import java.util.Locale;
 import java.util.Scanner;
 
 public class Lab2Main {
@@ -24,104 +25,66 @@ public class Lab2Main {
         Scanner scanner = new Scanner(System.in);
         System.out.print("CSV filename: ");
         String csv = scanner.nextLine();
+        PropertyAssessments assessments;
         try{
-            String[][] data = readData(csv);
-            System.out.print("Descriptive statistics of all property assessments\n");
-            PropertyAssessments assessments = PropertyAssessments.buildAssessments(data);
-            System.out.println(assessments.getAssessments().get(58));
+            assessments = PropertyAssessments.fromCsv(csv);
         } catch (IOException e){
             System.err.println("Error: can't open file " + csv);
+            return;
         }
-        /*
-         * Before output check for invalid states:
-         *  - file does not exist
-         *  - use System.err.println() to get the red text for the error message
-         *
-         * Required outputs:
-         *  - String telling user what it is displaying
-         *  - n (number of entries)
-         *  - min (lowest property value)
-         *  - max (largest property value)
-         *  - range (difference between max and min)
-         *  - mean (average property value)
-         *  - median (center most property value)
-         */
 
-
-//        System.out.print("Find a property assessment by account number: ");
-//        int accNum = scanner.nextInt();
-//        scanner.nextLine(); // Needed for invisible \n in nextInt()
-//        /*
-//         * Before output check for invalid states:
-//         *  - account number does not exist
-//         *  - user tries to enter a non-numeric answer
-//         *
-//         * Required outputs:
-//         * - Account number
-//         * - Address
-//         * - Assessed Value
-//         * - Assessment class (list)
-//         * - Neighbourhood: NAME (ward)
-//         * - Location (Lat, Long)
-//         */
-//        System.out.println("Account number: " + accNum);
-//
-//        System.out.print("Find statistics by neighbourhood: ");
-//        String neighbourhood = scanner.nextLine();
-//
-//        /*
-//         * Before output check for invalid states:
-//         * - user inputs a number
-//         * - user inputs a neighbourhood that does not exist
-//         *
-//         * Required outputs:
-//         * - Same as csv stats (seen above account number)
-//         */
-//        System.out.println("Statistics (neighbourhood = " + neighbourhood + ")");
-
-
-
+        System.out.print("Descriptive statistics of all property assessments\n");
+        printStatistics(assessments);
+        searchByAccountNumber(scanner, assessments);
+        filterByNeighbourHood(scanner, assessments);
 
     }
 
-    /**
-     * Read the contents of a CSV file and return data as a 2D array of String.
-     * This function is taken from Lab 1 of CMPT 305, credit goes to Dr Mees.
-     *
-     * @param csvFileName - the CSV file name
-     * @return the values in the CSV file as an array of String arrays
-     * @throws IOException - IO exception
-     */
-    private static String[][] readData(String csvFileName) throws IOException {
-        String[][] data;
-        int currentIndex = 0;
-        // Try-with-resources statement to create a stream to read the CSV file. Automatically closes the resource.
-        try (BufferedReader reader = Files.newBufferedReader(Path.of(csvFileName))) {
-            // Skip the header - this assumes the first line is a header
-            reader.readLine();
+    private static void printStatistics(PropertyAssessments assessments){
+        System.out.println("n = " + assessments.size());
+        System.out.println("min = " + "$" + String.format("%,d",assessments.min()));
+        System.out.println("max = " + "$" + String.format("%,d",assessments.max()));
+        System.out.println("range = " + "$" + String.format("%,d",assessments.range()));
+        System.out.println("mean = " + "$" + String.format("%,d",assessments.mean()));
+        System.out.println("median = " + "$" + String.format("%,d",assessments.median()));
+    }
 
-            // Create 2D array to store all rows of data as String
-            int initialSize = 100;
-            data = new String[initialSize][];
+    private static void searchByAccountNumber(Scanner scanner, PropertyAssessments assessments){
+        System.out.print("\nFind a property assessment by account number: ");
+        if (!scanner.hasNextInt()){
+            System.out.println("Invalid account number");
+            scanner.nextLine();
+            return;
+        }
+        int accNum = scanner.nextInt();
+        scanner.nextLine();
 
-            // Read the file line by line and store all rows into a 2D array
-            String record;
-            while ((record = reader.readLine()) != null) {
-                // Parse the record into fields
-                String[] values = CsvParser.parseCSVLine(record);
+        PropertyAssessment pa = assessments.filterById(accNum);
+        if (pa == null){
+            System.out.println("Property is not found");
+        } else {
+            System.out.println("Account number = " + pa.getAccountNumber());
+            System.out.println("Address = " + pa.getAddress());
+            System.out.println("Assessed value = " + pa.getAssessedValue());
+            System.out.println("Assessment class = " + pa.getAssessmentClasses());
+            System.out.println("Neighbourhood = " + pa.getNeighbourhood());
+            System.out.println("Location = " + pa.getLocation());
+        }
+    }
 
-                // Check if the array is full
-                if (currentIndex == data.length)
-                // Array is full, create and copy all values to a larger array
-                {
-                    data = Arrays.copyOf(data, data.length * 2);
-                }
+    private static void filterByNeighbourHood(Scanner scanner, PropertyAssessments assessments) {
+        System.out.print("\nFind statistics by neighbourhood: ");
+        String name = scanner.nextLine();
 
-                data[currentIndex++] = values;
-            }
+        PropertyAssessments filter = assessments.filterByNeighbourhood(name.toUpperCase());
+        if (filter.size() == 0){
+            System.out.println("Neighbourhood is not found");
+            return;
         }
 
-        // Remove empty rows in the array and return it
-        return Arrays.copyOf(data, currentIndex);
+        System.out.println("Statistics (neighbourhood = " + name + ")");
+        printStatistics(filter);
+
     }
+
 }

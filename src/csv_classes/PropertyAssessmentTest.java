@@ -16,7 +16,7 @@ public class PropertyAssessmentTest {
     }
 
     private static void testConstructorAndGetters() {
-        Address address = new Address(203, 14348, "115 AVENUE NW");
+        Address address = new Address("203", 14348, "115 AVENUE NW");
         Neighbourhood neighbourhood = new Neighbourhood(1090, "CANORA", "WIHKWENTOWIN");
         Location location = new Location(53.5591, -113.5321);
         List<AssessmentClass> classes = new ArrayList<>();
@@ -38,7 +38,7 @@ public class PropertyAssessmentTest {
     }
 
     private static void testEqualsAndHashCode() {
-        Address address = new Address(203, 14348, "115 AVENUE NW");
+        Address address = new Address("203", 14348, "115 AVENUE NW");
         Neighbourhood neighbourhood = new Neighbourhood(1090, "CANORA", "WIHKWENTOWIN");
         Location location = new Location(53.5591, -113.5321);
 
@@ -64,7 +64,7 @@ public class PropertyAssessmentTest {
     }
 
     private static void testCompareTo() {
-        Address address = new Address(0, 100, "MAIN ST");
+        Address address = new Address("0", 100, "MAIN ST");
         Neighbourhood neighbourhood = new Neighbourhood(1, "TEST", "TEST WARD");
         Location location = new Location(0.0, 0.0);
         List<AssessmentClass> classes = new ArrayList<>();
@@ -81,7 +81,7 @@ public class PropertyAssessmentTest {
     }
 
     private static void testToString() {
-        Address address = new Address(203, 14348, "115 AVENUE NW");
+        Address address = new Address("203", 14348, "115 AVENUE NW");
         Neighbourhood neighbourhood = new Neighbourhood(1090, "CANORA", "WIHKWENTOWIN");
         Location location = new Location(53.559155555, -113.5321000001);
         List<AssessmentClass> classes = new ArrayList<>();

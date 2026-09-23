@@ -44,16 +44,16 @@ public class PropertyAssessment implements Comparable<PropertyAssessment>{
         return taxClass;
     }
 
-    public String getAddress(){
-        return address.toString();
+    public Address getAddress(){
+        return address;
     }
 
-    public String getNeighbourhood(){
-        return neighbourhood.toString();
+    public Neighbourhood getNeighbourhood(){
+        return neighbourhood;
     }
 
-    public String getLocation(){
-        return location.toString();
+    public Location getLocation(){
+        return location;
     }
 
     public List<AssessmentClass> getAssessmentClasses(){
@@ -63,8 +63,8 @@ public class PropertyAssessment implements Comparable<PropertyAssessment>{
     @Override
     public String toString(){
         return "Account Number: " + getAccountNumber() + "\nAssessed Value: " + getAssessedValue() + "\nHas Garage?: " + hasGarage()
-                + "\nTax Class: " + getTaxClass() + "\nAddress: " + getAddress() + "\nNeighbourhood: " + getNeighbourhood()
-                + "\nAssessment Classes: " + getAssessmentClasses() + "\nLocation (lat/long): " + getLocation();
+                + "\nTax Class: " + getTaxClass() + "\nAddress: " + getAddress().toString() + "\nNeighbourhood: " + getNeighbourhood().toString()
+                + "\nAssessment Classes: " + getAssessmentClasses() + "\nLocation (lat/long): " + getLocation().toString();
      }
     @Override
     public boolean equals(Object obj){
