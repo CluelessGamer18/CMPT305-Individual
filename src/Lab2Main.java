@@ -1,5 +1,4 @@
-import Demo_Files.CsvParser;
-import csv_classes.PropertyAssessments;
+import csv_classes.*;
 
 import java.io.BufferedReader;
 import java.io.IOException;
@@ -27,6 +26,9 @@ public class Lab2Main {
         String csv = scanner.nextLine();
         try{
             String[][] data = readData(csv);
+            System.out.print("Descriptive statistics of all property assessments\n");
+            PropertyAssessments assessments = PropertyAssessments.buildAssessments(data);
+            System.out.println(assessments.getAssessments().get(58));
         } catch (IOException e){
             System.err.println("Error: can't open file " + csv);
         }
@@ -44,38 +46,38 @@ public class Lab2Main {
          *  - mean (average property value)
          *  - median (center most property value)
          */
-        System.out.printf("Descriptive statistics of all property assessments\n");
 
-        System.out.print("Find a property assessment by account number: ");
-        int accNum = scanner.nextInt();
-        scanner.nextLine(); // Needed for invisible \n in nextInt()
-        /*
-         * Before output check for invalid states:
-         *  - account number does not exist
-         *  - user tries to enter a non-numeric answer
-         *
-         * Required outputs:
-         * - Account number
-         * - Address
-         * - Assessed Value
-         * - Assessment class (list)
-         * - Neighbourhood: NAME (ward)
-         * - Location (Lat, Long)
-         */
-        System.out.println("Account number: " + accNum);
 
-        System.out.print("Find statistics by neighbourhood: ");
-        String neighbourhood = scanner.nextLine();
-
-        /*
-         * Before output check for invalid states:
-         * - user inputs a number
-         * - user inputs a neighbourhood that does not exist
-         *
-         * Required outputs:
-         * - Same as csv stats (seen above account number)
-         */
-        System.out.println("Statistics (neighbourhood = " + neighbourhood + ")");
+//        System.out.print("Find a property assessment by account number: ");
+//        int accNum = scanner.nextInt();
+//        scanner.nextLine(); // Needed for invisible \n in nextInt()
+//        /*
+//         * Before output check for invalid states:
+//         *  - account number does not exist
+//         *  - user tries to enter a non-numeric answer
+//         *
+//         * Required outputs:
+//         * - Account number
+//         * - Address
+//         * - Assessed Value
+//         * - Assessment class (list)
+//         * - Neighbourhood: NAME (ward)
+//         * - Location (Lat, Long)
+//         */
+//        System.out.println("Account number: " + accNum);
+//
+//        System.out.print("Find statistics by neighbourhood: ");
+//        String neighbourhood = scanner.nextLine();
+//
+//        /*
+//         * Before output check for invalid states:
+//         * - user inputs a number
+//         * - user inputs a neighbourhood that does not exist
+//         *
+//         * Required outputs:
+//         * - Same as csv stats (seen above account number)
+//         */
+//        System.out.println("Statistics (neighbourhood = " + neighbourhood + ")");
 
 
 
@@ -84,6 +86,7 @@ public class Lab2Main {
 
     /**
      * Read the contents of a CSV file and return data as a 2D array of String.
+     * This function is taken from Lab 1 of CMPT 305, credit goes to Dr Mees.
      *
      * @param csvFileName - the CSV file name
      * @return the values in the CSV file as an array of String arrays
