@@ -1,27 +1,13 @@
 import csv_classes.*;
 
-import java.io.BufferedReader;
 import java.io.IOException;
-import java.nio.file.Files;
-import java.nio.file.Path;
-import java.util.Arrays;
-import java.util.Locale;
+import java.util.Objects;
 import java.util.Scanner;
 
 public class Lab2Main {
 
     public static void main(String[] args){
 
-        /*
-         * Main simply executes functions, all data
-         * that is needed to be found will be found using
-         * calls to PropertyAssessments class.
-         *
-         * This also needs to make the call to the CSV reader
-         * to gather the data required to import to the class.
-         */
-
-        // Scanner is used to receive user input
         Scanner scanner = new Scanner(System.in);
         System.out.print("CSV filename: ");
         String csv = scanner.nextLine();
@@ -40,6 +26,10 @@ public class Lab2Main {
 
     }
 
+    /**
+     * Print the statistics for a specified assessment value
+     * @param assessments - PropertyAssessments object
+     */
     private static void printStatistics(PropertyAssessments assessments){
         System.out.println("n = " + assessments.size());
         System.out.println("min = " + "$" + String.format("%,d",assessments.min()));
@@ -49,6 +39,12 @@ public class Lab2Main {
         System.out.println("median = " + "$" + String.format("%,d",assessments.median()));
     }
 
+    /**
+     * Searches using a user inputted account number and calls filterById
+     * Prints statistics if the account number is found, a descriptive message if it wasn't
+     * @param scanner
+     * @param assessments
+     */
     private static void searchByAccountNumber(Scanner scanner, PropertyAssessments assessments){
         System.out.print("\nFind a property assessment by account number: ");
         if (!scanner.hasNextInt()){
@@ -72,18 +68,20 @@ public class Lab2Main {
         scanner.nextLine();
     }
 
+    /**
+     * Takes a user inputted neighbourhood name, searches for it using filterByNeighbourhood
+     * Uses printStatistics if the neighbourhood is found,
+     * elsewise it prints a descriptive message if it wasn't found
+     * @param scanner
+     * @param assessments
+     */
     private static void filterByNeighbourHood(Scanner scanner, PropertyAssessments assessments) {
         System.out.print("\nFind statistics by neighbourhood: ");
 
-        if (scanner.hasNextInt()){
-            System.out.println("Invalid neighbourhood name");
-            return;
-        }
-        String name = scanner.nextLine();
+        String name = scanner.nextLine().trim();
 
-        if (name.isEmpty()){
+        if (name.isEmpty() || new Scanner(name).hasNextInt()){
             System.out.println("Invalid neighbourhood name");
-            return;
         }
 
         PropertyAssessments filter = assessments.filterByNeighbourhood(name.toUpperCase());
