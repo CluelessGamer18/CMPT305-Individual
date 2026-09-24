@@ -11,7 +11,7 @@ public class PropertyAssessment implements Comparable<PropertyAssessment>{
     private final Address address;
     private final Neighbourhood neighbourhood;
     private final Location location;
-    private List<AssessmentClass> assessmentClasses;
+    private final List<AssessmentClass> assessmentClasses;
 
     public PropertyAssessment(int accountNumber, int assessedValue, boolean garage, String taxClass, Address address, Neighbourhood neighbourhood, List<AssessmentClass> assessmentClasses, Location location){
         this.accountNumber = accountNumber;

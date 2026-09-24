@@ -82,6 +82,7 @@ public class Lab2Main {
 
         if (name.isEmpty() || new Scanner(name).hasNextInt()){
             System.out.println("Invalid neighbourhood name");
+            return;
         }
 
         PropertyAssessments filter = assessments.filterByNeighbourhood(name.toUpperCase());

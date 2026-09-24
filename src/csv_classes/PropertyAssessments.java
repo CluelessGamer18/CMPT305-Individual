@@ -81,6 +81,25 @@ public class PropertyAssessments {
         return result;
     }
 
+    public PropertyAssessments filterByAssessmentClass(String name){
+        PropertyAssessments result = new PropertyAssessments();
+
+        for (PropertyAssessment pa: assessments){
+            for (AssessmentClass as: pa.getAssessmentClasses()){
+                if (Objects.equals(as.getClassName().toLowerCase(), name)){
+                    result.addAssessment(pa);
+                    break;
+                }
+            }
+        }
+
+        return result;
+    }
+
+    public boolean contains(PropertyAssessment pa){
+        return assessments.contains(pa);
+    }
+
     public long sum(){
         long total = 0;
         for (PropertyAssessment pa: assessments){
