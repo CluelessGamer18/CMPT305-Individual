@@ -10,7 +10,7 @@ public class Neighbourhood {
 
     public Neighbourhood(int neighbourhoodID, String neighbourhoodName, String ward){
         this.neighbourhoodID = neighbourhoodID;
-        this.neighbourhoodName = neighbourhoodName.toUpperCase();
+        this.neighbourhoodName = neighbourhoodName;
         this.ward = ward;
     }
 
@@ -30,7 +30,7 @@ public class Neighbourhood {
     @Override
     public String toString(){
 
-        return neighbourhoodName + " (" + ward.toLowerCase() + ")";
+        return neighbourhoodName.toUpperCase() + " (" + ward.toLowerCase() + ")";
     }
 
     @Override
