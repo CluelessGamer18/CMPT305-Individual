@@ -22,7 +22,7 @@ public class Lab3Main {
     }
 
     public static void neighbourhoodName(Scanner scanner, PropertyAssessments assessments){
-        System.out.print("\nPlease enter a neighbourhood name: ");
+        System.out.print("Please enter a neighbourhood name: ");
         String name = scanner.nextLine().trim();
 
         if (name.isEmpty() || new Scanner(name).hasNextInt()){
@@ -32,7 +32,7 @@ public class Lab3Main {
 
         PropertyAssessments filter = assessments.filterByNeighbourhood(name.toUpperCase());
         if (filter.size() == 0){
-            System.out.println("Neighbourhood is not found");
+            System.out.println("Sorry can't find data in " + name);
             return;
         }
 
@@ -47,6 +47,7 @@ public class Lab3Main {
 
         if (name.isEmpty() || new Scanner(name).hasNextInt()){
             System.out.println("Invalid assessment class");
+            return;
         }
 
         PropertyAssessments filter = assessments.filterByAssessmentClass(name.toLowerCase());
