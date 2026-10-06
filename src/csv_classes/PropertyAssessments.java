@@ -178,6 +178,10 @@ public class PropertyAssessments {
 
     }
 
+    public PropertyAssessment get(int index) {
+        return assessments.get(index);
+    }
+
     /**
      * A helper function to check whether a row is blank before comparing it as an integer value.
      * Default value should be set to 0.
