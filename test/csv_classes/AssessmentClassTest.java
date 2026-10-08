@@ -35,11 +35,14 @@ class AssessmentClassTest {
 
     @Test
     void testEquals() {
+        //reflexive
         assertEquals(a1, a1);
 
+        //symmetric
         assertEquals(a1.equals(a1Copy), a1Copy.equals(a1));
         assertEquals(a1.equals(a2), a2.equals(a1));
 
+        //transitive
         AssessmentClass a1Copy2 = new AssessmentClass("Residential", 100);
         if (a1.equals(a1Copy) && a1Copy.equals(a1Copy2)){
             assertEquals(a1, a1Copy2);
@@ -48,9 +51,11 @@ class AssessmentClassTest {
             assertNotEquals(a2, a1Copy2);
         }
 
+        //false
         assertNotEquals(a1, null);
         assertNotEquals(a1, "String");
 
+        //test all branches where false
         assertNotEquals(new AssessmentClass("Residential", 100), new AssessmentClass("Commercial", 100));
         assertNotEquals(new AssessmentClass("Commercial", 100), new AssessmentClass("Commercial", 75));
     }

@@ -101,11 +101,14 @@ class PropertyAssessmentTest {
 
     @Test
     void testEquals() {
-
+        //reflexive
         assertEquals(p1, p1);
+
+        //symmetric
         assertEquals(p1.equals(p1Copy), p1Copy.equals(p1));
         assertEquals(p1.equals(p2), p2.equals(p1));
 
+        //transitive
         PropertyAssessment p1Copy2 = new PropertyAssessment(100, 10000, true, "TaxClass", address1, neighbourhood1, assessmentClasses1, location1);
         if (p1.equals(p1Copy) && p1Copy.equals(p1Copy2)) {
             assertEquals(p1, p1Copy2);
@@ -114,9 +117,11 @@ class PropertyAssessmentTest {
             assertNotEquals(p2, p1Copy2);
         }
 
+        //false
         assertNotEquals(p1, null);
         assertNotEquals(p1, "String");
 
+        //test all branches where false
         assertNotEquals(new PropertyAssessment(100, 10000, true, "TaxClass", address1, neighbourhood1, assessmentClasses1, location1), new PropertyAssessment(400, 10000, true, "TaxClass", address1, neighbourhood1, assessmentClasses1, location1));
         assertNotEquals(new PropertyAssessment(100, 10000, true, "TaxClass", address1, neighbourhood1, assessmentClasses1, location1), new PropertyAssessment(100, 20000, true, "TaxClass", address1, neighbourhood1, assessmentClasses1, location1));
         assertNotEquals(new PropertyAssessment(100, 10000, true, "TaxClass", address1, neighbourhood1, assessmentClasses1, location1), new PropertyAssessment(100, 10000, false, "TaxClass", address1, neighbourhood1, assessmentClasses1, location1));

@@ -34,11 +34,14 @@ class LocationTest {
 
     @Test
     void testEquals() {
+        //reflexive
         assertEquals(l1, l1);
 
+        //symmetric
         assertEquals(l1.equals(l1Copy), l1Copy.equals(l1));
         assertEquals(l1.equals(l2), l2.equals(l1));
 
+        //transitive
         Location l1Copy2 = new Location(1.00000000, -5.90000000);
         if (l1.equals(l1Copy) && l1Copy.equals(l1Copy2)) {
             assertEquals(l1, l1Copy2);
@@ -47,10 +50,11 @@ class LocationTest {
             assertNotEquals(l2, l1Copy2);
         }
 
+        //false
         assertNotEquals(l1, null);  // x.equals(null) should return false.
         assertNotEquals(l1, "string");  // incorrect type
 
-        // test all branches of the compound return statement of equals (uses short-circuiting):
+        // test all branches where false
         assertNotEquals(new Location(1.00000000, 2.11111111), new Location(210.00000000, 2.11111111));
         assertNotEquals(new Location(1.00000000, 2.11111111), new Location(1.0000000, 1.00000000));
 

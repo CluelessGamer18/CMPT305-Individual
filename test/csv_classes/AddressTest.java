@@ -49,11 +49,14 @@ class AddressTest {
 
     @Test
     void testEquals() {
+        //reflexive
         assertEquals(a1, a1);
 
+        //symmetric
         assertEquals(a1.equals(a1Copy), a1Copy.equals(a1));
         assertEquals(a1.equals(a2), a2.equals(a1));
 
+        //transitive
         Address a1Copy2 = new Address("123F", 123, "Street");
         if (a1.equals(a1Copy) && a1Copy.equals(a1Copy2)) {
             assertEquals(a1, a1Copy2);
@@ -62,9 +65,11 @@ class AddressTest {
             assertNotEquals(a2, a1Copy2);
         }
 
+        //false
         assertNotEquals(a1, null);
         assertNotEquals(a1, "String");
 
+        //test all branches for false
         assertNotEquals(new Address("123E", 2504, "Street"), new Address("199", 2504, "Street"));
         assertNotEquals(new Address("123E", 2504, "Street"), new Address("123E", 1000, "Street"));
         assertNotEquals(new Address("123E", 2504, "Street"), new Address("123E", 2504, "Avenue"));
