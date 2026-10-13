@@ -1,5 +1,7 @@
 package csv_classes;
 
+import org.junit.jupiter.api.Test;
+
 import java.util.List;
 
 import static org.junit.jupiter.api.Assertions.*;
@@ -117,11 +119,41 @@ class PropertyAssessmentsTest {
         test.addAssessment(assessment1);
         //test empty
         assertEquals(0, test.filterByAssessmentClass("Non - Existent").size());
-        returnValue = test.filterByAssessmentClass("class 1");
+        returnValue = test.filterByAssessmentClass("Class 1");
         assertEquals(assessment1, returnValue.get(0));
 
         assertNotEquals(assessment2, returnValue.get(0));
 
+    }
+
+    @Test
+    void filterByTaxClass() {
+        assessment1 = PropertyAssessments.buildAssessments(new String[][]{validRow}).get(0);
+        validRow[8] = "Commercial";
+        assessment2 = PropertyAssessments.buildAssessments(new String[][]{validRow}).get(0);
+
+        test.addAssessment(assessment1);
+
+        assertEquals(0, test.filterByTaxClass("Non - Existent").size());
+        returnValue = test.filterByTaxClass("RESIDENTIAL");
+        assertEquals(assessment1, returnValue.get(0));
+
+        assertNotEquals(assessment2, returnValue.get(0));
+    }
+
+    @Test
+    void filterByPrimaryAssessmentClass() {
+        assessment1 = PropertyAssessments.buildAssessments(new String[][]{validRow}).get(0);
+        validRow[10] = "Commercial";
+        assessment2 = PropertyAssessments.buildAssessments(new String[][]{validRow}).get(0);
+
+        test.addAssessment(assessment1);
+
+        assertEquals(0, test.filterByPrimaryAssessmentClass("Non - Existent").size());
+        returnValue = test.filterByPrimaryAssessmentClass("class 1");
+        assertEquals(assessment1, returnValue.get(0));
+
+        assertNotEquals(assessment2, returnValue.get(0));
     }
 
     @org.junit.jupiter.api.Test

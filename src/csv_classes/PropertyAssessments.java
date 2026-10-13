@@ -73,8 +73,10 @@ public class PropertyAssessments {
 
     public PropertyAssessments filterByNeighbourhood(String name){
         PropertyAssessments result = new PropertyAssessments();
+        name = name.toLowerCase();
+
         for (PropertyAssessment pa: assessments){
-            if (Objects.equals(pa.getNeighbourhood().getNeighbourhoodName(), name)){
+            if (Objects.equals(pa.getNeighbourhood().getNeighbourhoodName().toLowerCase(), name)){
                 result.addAssessment(pa);
             }
         }
@@ -83,6 +85,7 @@ public class PropertyAssessments {
 
     public PropertyAssessments filterByAssessmentClass(String name){
         PropertyAssessments result = new PropertyAssessments();
+        name = name.toLowerCase();
 
         for (PropertyAssessment pa: assessments){
             for (AssessmentClass as: pa.getAssessmentClasses()){
@@ -90,6 +93,32 @@ public class PropertyAssessments {
                     result.addAssessment(pa);
                     break;
                 }
+            }
+        }
+
+        return result;
+    }
+
+    public PropertyAssessments filterByTaxClass(String name){
+        PropertyAssessments result = new PropertyAssessments();
+        name = name.toLowerCase();
+
+        for (PropertyAssessment pa: assessments){
+            if (Objects.equals(pa.getTaxClass().toLowerCase(), name)){
+                result.addAssessment(pa);
+            }
+        }
+
+        return result;
+    }
+
+    public PropertyAssessments filterByPrimaryAssessmentClass(String name) {
+        PropertyAssessments result = new PropertyAssessments();
+        name = name.toLowerCase();
+
+        for (PropertyAssessment pa: assessments) {
+            if (Objects.equals(pa.getAssessmentClasses().getFirst().getClassName().toLowerCase(), name)) {
+                result.addAssessment(pa);
             }
         }
 
