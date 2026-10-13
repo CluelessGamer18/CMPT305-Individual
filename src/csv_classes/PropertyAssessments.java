@@ -125,6 +125,18 @@ public class PropertyAssessments {
         return result;
     }
 
+    public PropertyAssessments filterByGarage(boolean hasGarage) {
+        PropertyAssessments result = new PropertyAssessments();
+
+        for (PropertyAssessment pa: assessments) {
+            if (Objects.equals(pa.hasGarage(), hasGarage)){
+                result.addAssessment(pa);
+            }
+        }
+
+        return result;
+    }
+
     public boolean contains(PropertyAssessment pa){
         return assessments.contains(pa);
     }
