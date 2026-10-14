@@ -7,7 +7,7 @@ import java.nio.file.Path;
 import java.util.*;
 
 public class PropertyAssessments {
-    private List<PropertyAssessment> assessments;
+    private final List<PropertyAssessment> assessments;
 
     public PropertyAssessments(){
         this.assessments = new ArrayList<>();
@@ -114,10 +114,9 @@ public class PropertyAssessments {
 
     public PropertyAssessments filterByPrimaryAssessmentClass(String name) {
         PropertyAssessments result = new PropertyAssessments();
-        name = name.toLowerCase();
 
         for (PropertyAssessment pa: assessments) {
-            if (Objects.equals(pa.getAssessmentClasses().getFirst().getClassName().toLowerCase(), name)) {
+            if (Objects.equals(pa.getAssessmentClasses().getFirst().getClassName(), name)) {
                 result.addAssessment(pa);
             }
         }
@@ -129,12 +128,80 @@ public class PropertyAssessments {
         PropertyAssessments result = new PropertyAssessments();
 
         for (PropertyAssessment pa: assessments) {
-            if (Objects.equals(pa.hasGarage(), hasGarage)){
+            if (pa.hasGarage() == hasGarage){
                 result.addAssessment(pa);
             }
         }
 
         return result;
+    }
+
+    // Remove the extreme outliers in the data
+    public PropertyAssessments filterByValueRange(int min, int max) {
+        PropertyAssessments result = new PropertyAssessments();
+
+        for (PropertyAssessment pa: assessments) {
+            int value = pa.getAssessedValueRaw();
+            if (value  >= min && value <= max) {
+                result.addAssessment(pa);
+            }
+        }
+
+        return result;
+    }
+
+    public PropertyAssessments filterByWard(String ward) {
+        PropertyAssessments result = new PropertyAssessments();
+        ward = ward.toLowerCase();
+
+        for (PropertyAssessment pa: assessments) {
+            if (Objects.equals(pa.getNeighbourhood().getWard().toLowerCase(), ward)) {
+                result.addAssessment(pa);
+            }
+        }
+
+        return result;
+    }
+
+    // Properties with a non-empty suite number
+    public PropertyAssessments onlySuites() {
+        PropertyAssessments result = new PropertyAssessments();
+
+        for (PropertyAssessment pa: assessments) {
+            if (!pa.getAddress().getSuiteNumber().isBlank()) {
+                result.addAssessment(pa);
+            }
+        }
+
+        return result;
+    }
+
+    public PropertyAssessments withoutSuites() {
+        PropertyAssessments result = new PropertyAssessments();
+
+        for (PropertyAssessment pa: assessments) {
+            if (pa.getAddress().getSuiteNumber().isBlank()) {
+                result.addAssessment(pa);
+            }
+        }
+
+        return result;
+    }
+
+    public Map<String, PropertyAssessments> groupByNeighbourhood() {
+        Map<String, PropertyAssessments> groups = new HashMap<>();
+
+        for(PropertyAssessment pa: assessments){
+            String neighbourhood = pa.getNeighbourhood().getNeighbourhoodName();
+
+            if (!groups.containsKey(neighbourhood)) {
+                groups.put(neighbourhood, new PropertyAssessments());
+            }
+
+            groups.get(neighbourhood).addAssessment(pa);
+        }
+
+        return groups;
     }
 
     public boolean contains(PropertyAssessment pa){
@@ -162,16 +229,8 @@ public class PropertyAssessments {
         return min;
     }
 
-    public int size(){
-        int size = 0;
-        if (assessments.isEmpty()) {
-            return size;
-        }
-
-        for (PropertyAssessment pa: assessments){
-            size += 1;
-        }
-        return size;
+    public int size() {
+        return assessments.size();
     }
 
     public int max(){
