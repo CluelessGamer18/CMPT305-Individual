@@ -3,9 +3,9 @@ package csv_classes;
 import java.util.Objects;
 
 public class Address {
-    private String suiteNumber;
-    private int houseNumber = 0;
-    private String streetName;
+    private final String suiteNumber;
+    private final int houseNumber;
+    private final String streetName;
 
     public Address(String suiteNumber, int houseNumber, String streetName){
         this.suiteNumber = suiteNumber;
@@ -17,7 +17,7 @@ public class Address {
         return suiteNumber;
     }
 
-    public int gethouseNumber(){
+    public int getHouseNumber(){
         return houseNumber;
     }
 

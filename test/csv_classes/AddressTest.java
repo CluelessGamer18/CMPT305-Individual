@@ -31,7 +31,7 @@ class AddressTest {
 
     @Test
     void gethouseNumber() {
-        assertEquals(123, a1.gethouseNumber());
+        assertEquals(123, a1.getHouseNumber());
     }
 
     @Test

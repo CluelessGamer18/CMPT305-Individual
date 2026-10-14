@@ -1,12 +1,11 @@
 package csv_classes;
 
-import java.util.Locale;
 import java.util.Objects;
 
 public class Neighbourhood {
-    private int neighbourhoodID;
-    private String neighbourhoodName;
-    private String ward;
+    private final int neighbourhoodID;
+    private final String neighbourhoodName;
+    private final String ward;
 
     public Neighbourhood(int neighbourhoodID, String neighbourhoodName, String ward){
         this.neighbourhoodID = neighbourhoodID;

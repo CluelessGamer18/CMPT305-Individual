@@ -1,6 +1,5 @@
 import csv_classes.CommercialProxy;
 import csv_classes.Distance;
-import csv_classes.PropertyAssessment;
 import csv_classes.PropertyAssessments;
 
 import java.io.IOException;
@@ -15,7 +14,7 @@ import java.util.Scanner;
  */
 public class IndividualProject {
 
-    public static void main(String[] args){
+    static void main(){
 
         Scanner scanner = new Scanner(System.in);
         System.out.print("CSV filename: ");

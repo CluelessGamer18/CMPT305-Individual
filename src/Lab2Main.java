@@ -1,12 +1,11 @@
 import csv_classes.*;
 
 import java.io.IOException;
-import java.util.Objects;
 import java.util.Scanner;
 
 public class Lab2Main {
 
-    public static void main(String[] args){
+    static void main(){
 
         Scanner scanner = new Scanner(System.in);
         System.out.print("CSV filename: ");
@@ -42,8 +41,6 @@ public class Lab2Main {
     /**
      * Searches using a user inputted account number and calls filterById
      * Prints statistics if the account number is found, a descriptive message if it wasn't
-     * @param scanner
-     * @param assessments
      */
     private static void searchByAccountNumber(Scanner scanner, PropertyAssessments assessments){
         System.out.print("\nFind a property assessment by account number: ");
@@ -72,8 +69,6 @@ public class Lab2Main {
      * Takes a user inputted neighbourhood name, searches for it using filterByNeighbourhood
      * Uses printStatistics if the neighbourhood is found,
      * elsewise it prints a descriptive message if it wasn't found
-     * @param scanner
-     * @param assessments
      */
     private static void filterByNeighbourHood(Scanner scanner, PropertyAssessments assessments) {
         System.out.print("\nFind statistics by neighbourhood: ");

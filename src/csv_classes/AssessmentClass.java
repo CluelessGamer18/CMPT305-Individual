@@ -3,8 +3,8 @@ package csv_classes;
 import java.util.Objects;
 
 public class AssessmentClass {
-    private String className;
-    private int percentage;
+    private final String className;
+    private final int percentage;
 
     public AssessmentClass(String className, int percentage){
         this.className = className;

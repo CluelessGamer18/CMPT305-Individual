@@ -4,7 +4,7 @@ import java.io.IOException;
 import java.util.Scanner;
 
 public class Lab3Main {
-    public static void main(String[] args){
+    static void main(){
 
         Scanner scanner = new Scanner(System.in);
         System.out.print("CSV filename: ");

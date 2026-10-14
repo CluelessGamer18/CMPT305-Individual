@@ -124,18 +124,6 @@ public class PropertyAssessments {
         return result;
     }
 
-    public PropertyAssessments filterByGarage(boolean hasGarage) {
-        PropertyAssessments result = new PropertyAssessments();
-
-        for (PropertyAssessment pa: assessments) {
-            if (pa.hasGarage() == hasGarage){
-                result.addAssessment(pa);
-            }
-        }
-
-        return result;
-    }
-
     // Remove the extreme outliers in the data
     public PropertyAssessments filterByValueRange(int min, int max) {
         PropertyAssessments result = new PropertyAssessments();
@@ -148,60 +136,6 @@ public class PropertyAssessments {
         }
 
         return result;
-    }
-
-    public PropertyAssessments filterByWard(String ward) {
-        PropertyAssessments result = new PropertyAssessments();
-        ward = ward.toLowerCase();
-
-        for (PropertyAssessment pa: assessments) {
-            if (Objects.equals(pa.getNeighbourhood().getWard().toLowerCase(), ward)) {
-                result.addAssessment(pa);
-            }
-        }
-
-        return result;
-    }
-
-    // Properties with a non-empty suite number
-    public PropertyAssessments onlySuites() {
-        PropertyAssessments result = new PropertyAssessments();
-
-        for (PropertyAssessment pa: assessments) {
-            if (!pa.getAddress().getSuiteNumber().isBlank()) {
-                result.addAssessment(pa);
-            }
-        }
-
-        return result;
-    }
-
-    public PropertyAssessments withoutSuites() {
-        PropertyAssessments result = new PropertyAssessments();
-
-        for (PropertyAssessment pa: assessments) {
-            if (pa.getAddress().getSuiteNumber().isBlank()) {
-                result.addAssessment(pa);
-            }
-        }
-
-        return result;
-    }
-
-    public Map<String, PropertyAssessments> groupByNeighbourhood() {
-        Map<String, PropertyAssessments> groups = new HashMap<>();
-
-        for(PropertyAssessment pa: assessments){
-            String neighbourhood = pa.getNeighbourhood().getNeighbourhoodName();
-
-            if (!groups.containsKey(neighbourhood)) {
-                groups.put(neighbourhood, new PropertyAssessments());
-            }
-
-            groups.get(neighbourhood).addAssessment(pa);
-        }
-
-        return groups;
     }
 
     public boolean contains(PropertyAssessment pa){
@@ -285,9 +219,6 @@ public class PropertyAssessments {
     /**
      * A helper function to check whether a row is blank before comparing it as an integer value.
      * Default value should be set to 0.
-     * @param s
-     * @param defaultValue
-     * @return
      */
     private static int parseIntOrDefault(String s, int defaultValue){
         if (s == null || s.isBlank()) return defaultValue;

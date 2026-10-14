@@ -24,10 +24,9 @@ public class CommercialProxy {
     // Returned when there are no commercial properties nearby
     private static final int NO_COMMERCIAL_NEARBY = Integer.MAX_VALUE;
 
-    private  PropertyAssessments assessments;
+    private final PropertyAssessments assessments;
     private  PropertyAssessments residential;
     private  PropertyAssessments commercial;
-    private PropertyAssessments residentialBeforeFilters;
     private PropertyAssessments totalResidential;
     private  int removedBelowMinValue;
     private int removedAboveMaxValue;
@@ -50,7 +49,7 @@ public class CommercialProxy {
     private void cleanData() {
         totalResidential = assessments.filterByTaxClass("Residential");
 
-        residentialBeforeFilters = totalResidential.filterByValueRange(MIN_RESIDENTIAL_VALUE, Integer.MAX_VALUE);
+        PropertyAssessments residentialBeforeFilters = totalResidential.filterByValueRange(MIN_RESIDENTIAL_VALUE, Integer.MAX_VALUE);
         removedBelowMinValue = totalResidential.size() - residentialBeforeFilters.size();
         residential = residentialBeforeFilters.filterByValueRange(MIN_RESIDENTIAL_VALUE, MAX_RESIDENTIAL_VALUE);
         removedAboveMaxValue = residentialBeforeFilters.size() - residential.size();
@@ -65,7 +64,7 @@ public class CommercialProxy {
             Location location = pa.getLocation();
             long key = cellKey(cellRow(location), cellCol(location));
 
-            commercialIndex.computeIfAbsent(key, k -> new ArrayList<>()).add(location);
+            commercialIndex.computeIfAbsent(key, _ -> new ArrayList<>()).add(location);
         }
     }
 
@@ -132,7 +131,7 @@ public class CommercialProxy {
             PropertyAssessment house = record.getProperty();
             String type = house.getAddress().getSuiteNumber().isBlank() ? "house" : "condo";
             String key = house.getNeighbourhood().getNeighbourhoodName() + " | " + type;
-            groups.computeIfAbsent(key, k -> new ArrayList<>()).add(record);
+            groups.computeIfAbsent(key, _ -> new ArrayList<>()).add(record);
         }
 
         List<Double> differences = new ArrayList<>();
@@ -167,7 +166,6 @@ public class CommercialProxy {
 
     /**
      * Returns a median of a sorted List<Double>
-     * @param values
      * @return median value of sorted List<Double>
      */
     private double median(List<Double> values) {
@@ -194,7 +192,7 @@ public class CommercialProxy {
 
     /**
      * Houses grouped by their distance band
-     * @return Map of distances of propertyassments
+     * @return Map of distances of property assessments
      */
     public Map<Distance, PropertyAssessments> getHomeByDistanceBand() {
         Map<Distance, PropertyAssessments> groups = new EnumMap<>(Distance.class);

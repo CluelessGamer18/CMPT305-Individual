@@ -30,7 +30,7 @@ class PropertyAssessmentsTest {
         assessment1 = PropertyAssessments.buildAssessments(new String[][]{validRow}).get(0);
         assertEquals(100, assessment1.getAccountNumber());
         assertEquals("12", assessment1.getAddress().getSuiteNumber());
-        assertEquals(10001, assessment1.getAddress().gethouseNumber());
+        assertEquals(10001, assessment1.getAddress().getHouseNumber());
         assertEquals("101 STREET", assessment1.getAddress().getStreetName());
         assertEquals(1001, assessment1.getNeighbourhood().getNeighbourhoodID());
         assertEquals("NBH 1", assessment1.getNeighbourhood().getNeighbourhoodName());
@@ -52,7 +52,7 @@ class PropertyAssessmentsTest {
         //Where house number is empty
         validRow[2] = "";
         assessment1 = PropertyAssessments.buildAssessments(new String[][]{validRow}).get(0);
-        assertEquals(0, assessment1.getAddress().gethouseNumber());
+        assertEquals(0, assessment1.getAddress().getHouseNumber());
 
         //Where street name is empty
         validRow[3] = "";
@@ -272,7 +272,7 @@ class PropertyAssessmentsTest {
     void parseIntOrDefault(){
         validRow[2] = null;
         assessment1 = PropertyAssessments.buildAssessments(new String[][]{validRow}).get(0);
-        assertEquals(0, assessment1.getAddress().gethouseNumber());
+        assertEquals(0, assessment1.getAddress().getHouseNumber());
 
     }
 
