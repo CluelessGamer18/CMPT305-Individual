@@ -80,10 +80,10 @@ public class CommercialProxy {
 
     // Combine row and column into one long to use as my map key
     private long cellKey(int row, int col) {
-        return row * CELL_KEY_MULTIPLIER * col;
+        return row * CELL_KEY_MULTIPLIER + col;
     }
 
-    private int nearestCommercialDistance(Location house) {
+    int nearestCommercialDistance(Location house) {
         int houseRow = cellRow(house);
         int houseCol = cellCol(house);
         int nearest = NO_COMMERCIAL_NEARBY; // Initially
@@ -225,5 +225,29 @@ public class CommercialProxy {
 
     public int getNearThresholdMeters() {
         return NEAR_THRESHOLD_METERS;
+    }
+
+    public PropertyAssessments getAssessments() {
+        return assessments;
+    }
+
+    public PropertyAssessments getTotalResidential() {
+        return totalResidential;
+    }
+
+    public int getRemovedBelowMinValue() {
+        return removedBelowMinValue;
+    }
+
+    public int getRemovedAboveMaxValue() {
+        return removedAboveMaxValue;
+    }
+
+    public PropertyAssessments getResidential() {
+        return residential;
+    }
+
+    public PropertyAssessments getCommercial() {
+        return commercial;
     }
 }

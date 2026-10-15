@@ -23,10 +23,10 @@ public class PropertyAssessments {
         for (String[] row: data) {
             int accountNumber = Integer.parseInt(row[0]);
             String suite = row[1];
-            int houseNumber = parseIntOrDefault(row[2], 0);
+            int houseNumber = parseIntOrDefault(row[2]);
             String streetName = row[3];
-            int neighbourhoodId = parseIntOrDefault(row[4], 0);
-            String neighbouhoodName = row[5];
+            int neighbourhoodId = parseIntOrDefault(row[4]);
+            String neighbourhoodName = row[5];
             String ward = row[6];
             int assessedValue = Integer.parseInt(row[7]);
             String taxClass = row[8];
@@ -43,7 +43,7 @@ public class PropertyAssessments {
                 }
             }
 
-            Neighbourhood neighbourhood = new Neighbourhood(neighbourhoodId, neighbouhoodName, ward);
+            Neighbourhood neighbourhood = new Neighbourhood(neighbourhoodId, neighbourhoodName, ward);
             Address address = new Address(suite, houseNumber, streetName);
             Location location = new Location(latitude, longitude);
 
@@ -155,7 +155,7 @@ public class PropertyAssessments {
         if (assessments.isEmpty()){
             return 0;
         }
-        int min = assessments.get(0).getAssessedValueRaw();
+        int min = assessments.getFirst().getAssessedValueRaw();
         for (PropertyAssessment pa: assessments){
             if (pa.getAssessedValueRaw() < min){
                 min = pa.getAssessedValueRaw();
@@ -172,7 +172,7 @@ public class PropertyAssessments {
         if (assessments.isEmpty()){
             return 0;
         }
-        int max = assessments.get(0).getAssessedValueRaw();
+        int max = assessments.getFirst().getAssessedValueRaw();
         for (PropertyAssessment pa: assessments){
             if (pa.getAssessedValueRaw() > max){
                 max = pa.getAssessedValueRaw();
@@ -221,8 +221,8 @@ public class PropertyAssessments {
      * A helper function to check whether a row is blank before comparing it as an integer value.
      * Default value should be set to 0.
      */
-    private static int parseIntOrDefault(String s, int defaultValue){
-        if (s == null || s.isBlank()) return defaultValue;
+    private static int parseIntOrDefault(String s){
+        if (s == null || s.isBlank()) return 0;
         return Integer.parseInt(s.trim());
     }
 

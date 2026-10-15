@@ -156,6 +156,19 @@ class PropertyAssessmentsTest {
         assertNotEquals(assessment2, returnValue.get(0));
     }
 
+    @Test
+    void filterByValueRange() {
+        assessment1 = PropertyAssessments.buildAssessments(new String[][]{validRow}).get(0);
+        validRow[7] = "300000";
+        assessment2 = PropertyAssessments.buildAssessments(new String[][]{validRow}).get(0);
+        test.addAssessment(assessment1);
+        test.addAssessment(assessment2);
+
+        assertEquals(0, test.filterByValueRange(20000000, 500000000).size());
+        assertTrue(test.filterByValueRange(50000, 150000).contains(assessment1));
+        assertFalse(test.filterByValueRange(50000, 150000).contains(assessment2));
+    }
+
     @org.junit.jupiter.api.Test
     void contains() {
         assessment1 = PropertyAssessments.buildAssessments(new String[][]{validRow}).get(0);
