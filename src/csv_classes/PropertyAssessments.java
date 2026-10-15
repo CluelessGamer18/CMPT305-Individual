@@ -114,9 +114,10 @@ public class PropertyAssessments {
 
     public PropertyAssessments filterByPrimaryAssessmentClass(String name) {
         PropertyAssessments result = new PropertyAssessments();
+        name = name.toLowerCase();
 
         for (PropertyAssessment pa: assessments) {
-            if (Objects.equals(pa.getAssessmentClasses().getFirst().getClassName(), name)) {
+            if (Objects.equals(pa.getAssessmentClasses().getFirst().getClassName().toLowerCase(), name)) {
                 result.addAssessment(pa);
             }
         }
