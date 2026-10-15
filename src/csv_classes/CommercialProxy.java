@@ -190,6 +190,16 @@ public class CommercialProxy {
                 + String.format("Commercial Properties:                    %,d%n", commercial.size());
     }
 
+    public double getPercentWithin(int meters) {
+        int count = 0;
+        for (ProximityRecords record: records) {
+            if (record.getNearestCommercialPropertyInMeters() <= meters) {
+                count++;
+            }
+        }
+        return count * 100.0 / records.size();
+    }
+
     /**
      * Houses grouped by their distance band
      * @return Map of distances of property assessments

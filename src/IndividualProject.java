@@ -40,5 +40,7 @@ public class IndividualProject {
         System.out.println("Near - within " + api.getNearThresholdMeters() + " m of a commercial property.");
         System.out.println("Compared inside " + api.getGroupsCompared() + " groups of same-neighbourhood same-type (house or condo)");
         System.out.printf("Median difference in value, near vs far: %+.1f%%%n", api.getNearFarDistance());
+
+        System.out.printf("Houses within 150m of a commercial property: %.1f%%%n", api.getPercentWithin(150));
     }
 }
